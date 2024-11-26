@@ -106,8 +106,8 @@ function sendOrder() {
     const densityCost = parseFloat(document.getElementById('density').value);
     const material = document.getElementById('material').selectedOptions[0].text;
     const density = document.getElementById('density').selectedOptions[0].text;
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
 
     // Проверка на заполнение имени и телефона
     if (!name || !phone) {
@@ -116,29 +116,31 @@ function sendOrder() {
     }
 
     // Проверка на корректные размеры
-    if (isNaN(width) || isNaN(height)) {
+    if (isNaN(width) || isNaN(height) || width <= 0 || height <= 0) {
         alert("Пожалуйста, введите правильные размеры!");
         return;
     }
 
-    // Расчет цены
-    const area = width * height;
-    let basePrice = area * materialCost;
-    basePrice += densityCost;
+    // Расчет цены, если результат пустой или не рассчитан
+    let resultPrice = document.getElementById('result').innerText.trim();
+    if (!resultPrice || resultPrice === "Цена:" || resultPrice === "") {
+        const area = width * height;
+        let basePrice = area * materialCost;
+        basePrice += densityCost;
 
-    let minPrice = Math.round(basePrice);
-    let maxPrice = Math.round(basePrice + (basePrice * 0.1));
+        const minPrice = Math.round(basePrice);
+        const maxPrice = Math.round(basePrice + (basePrice * 0.1));
+        resultPrice = `От ${minPrice} до ${maxPrice} драм.`;
 
-    const resultPrice = `От ${minPrice} до ${maxPrice} драм.`;
-
-    // Записываем цену в элемент #result (на случай, если она потребуется на экране)
-    document.getElementById('result').innerText = resultPrice;
+        // Обновляем #result для синхронности
+        document.getElementById('result').innerText = `Цена: ${resultPrice}`;
+    }
 
     // Получаем текущую дату и время (GMT+4)
     const now = new Date();
     const offsetHours = 4; // GMT+4
     const gmtPlus4 = new Date(now.getTime() + offsetHours * 60 * 60 * 1000);
-    const orderTime = `${gmtPlus4.getHours()}:${gmtPlus4.getMinutes().toString().padStart(2, '0')}`;
+    const orderDate = `${gmtPlus4.toLocaleDateString()} ${gmtPlus4.getHours()}:${gmtPlus4.getMinutes().toString().padStart(2, '0')}`;
 
     // Формируем сообщение для Telegram
     const message = `
@@ -149,7 +151,7 @@ function sendOrder() {
     \n📄Материал: ${material}
     \n📈Плотность печати: ${density}
     \n💰Цена: ${resultPrice}
-    \n🕒Дата и время заказа: ${orderTime}`;
+    \n📅Дата заказа: ${orderDate}`;
 
     // Отправляем данные в Telegram
     const token = '7475133843:AAGdtr_FAPQmn772HJOyU1gYRMK8hYJsoeY';
