@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">Калькулятор цены печати баннера</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <!-- Выбор языка с флагами внутри контейнера -->
+    <div id="language-selector">
+        <img src="https://cdn-icons-png.flaticon.com/512/323/323300.png" alt="Россия" onclick="changeLanguage('ru')" title="Русский">
+        <img src="https://cdn-icons-png.flaticon.com/512/197/197516.png" alt="Армения" onclick="changeLanguage('am')" title="Հայերեն">
+        <img src="https://cdn-icons-png.flaticon.com/512/323/323310.png" alt="Англия" onclick="changeLanguage('en')" title="English">
+    </div>
+
+    <!-- Заголовок, который будет изменяться в зависимости от языка -->
+    <h2 id="sendingTitle">Калькулятор цен</h2>
+
+    <form>
+        <!-- Выбор материала -->
+        <label id="materialLabel">Материал:</label>
+        <select id="material">
+            <option value="1000">Бумага 1000 г/м²</option>
+            <option value="2000">Толстая бумага 2000 г/м²</option>
+        </select>
+
+        <!-- Выбор плотности печати -->
+        <label id="densityLabel">Плотность печати:</label>
+        <select id="density">
+            <option value="200">360 dpi</option>
+            <option value="300">600 dpi</option>
+            <option value="400">720 dpi</option>
+            <option value="500">1440 dpi</option>
+        </select>
+
+        <!-- Ввод ширины -->
+        <label id="widthLabel">Ширина (м):</label>
+        <input type="number" id="width" step="0.1" placeholder="Введите ширину">
+
+        <!-- Ввод высоты -->
+        <label id="heightLabel">Высота (м):</label>
+        <input type="number" id="height" step="0.1" placeholder="Введите высоту">
+
+        <!-- Кнопка расчета -->
+        <button type="button" id="calculateBtn" onclick="calculatePrice()">Рассчитать</button>
+
+        <!-- Результат расчета -->
+        <div id="result">Цена: </div>
+
+        <!-- Ввод имени -->
+        <input type="text" id="name" placeholder="Введите имя">
+
+        <!-- Ввод телефона -->
+        <input type="tel" id="phone" placeholder="Введите номер телефона">
+
+        <!-- Кнопка отправки заказа -->
+        <button type="button" id="sendBtn" onclick="sendOrder()">Зарегистрировать заказ</button>
+    </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
