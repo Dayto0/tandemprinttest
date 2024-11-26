@@ -24,11 +24,22 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
-/* Заголовок страницы */
+/* Заголовки */
 h1, h2 {
     margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: normal;
 }
 
 /* Стили для полей ввода и кнопок */
@@ -48,6 +59,7 @@ button {
     color: white;
     font-size: 18px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -57,16 +69,34 @@ button:hover {
 /* Стили для флага языка */
 #language-selector {
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
     gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px; /* Отступ снизу, чтобы флаги не были слишком близко к элементам формы */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
 }
 
-/* Стили для флага */
+/* Стили для флагов */
 #language-selector img {
     width: 30px;
     height: 30px;
     cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Ограничение размеров флагов для маленьких экранов */
+@media (max-width: 600px) {
+    #language-selector img {
+        width: 25px;
+        height: 25px;
+    }
+    #language-selector {
+        top: 5px;
+        left: 5px;
+    }
 }
 
 /* Центрирование всех элементов внутри контейнера */
@@ -88,4 +118,34 @@ form {
 #registrationTitle {
     font-size: 30px; /* Увеличиваем размер шрифта */
     font-weight: bold; /* Можно добавить жирный шрифт для выделения */
+}
+
+/* Заголовок Тандем Принт */
+#headerTitle {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Стили для адаптивности */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    input[type="text"], input[type="tel"], input[type="number"], select, button {
+        font-size: 14px;
+    }
+
+    h1, h2 {
+        font-size: 18px;
+    }
+
+    #registrationTitle {
+        font-size: 24px;
+    }
+
+    #headerTitle {
+        font-size: 22px;
+    }
 }
