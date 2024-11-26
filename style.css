@@ -10,7 +10,6 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    position: relative; /* Для позиционирования внутренних элементов */
 }
 
 /* Контейнер для формы */
@@ -25,6 +24,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative; /* Добавляем позиционирование */
 }
 
 /* Заголовки */
@@ -65,14 +65,11 @@ button:hover {
 /* Стили для флагов языка */
 #language-selector {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center; /* Центрируем в контейнере */
     align-items: center;
     gap: 10px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 1000;
-    flex-wrap: wrap; /* Чтобы флаги переносились на следующую строку на маленьких экранах */
+    margin-bottom: 10px; /* Добавляем отступ снизу */
+    flex-wrap: wrap; /* Флаги переносятся на новую строку при необходимости */
 }
 
 #language-selector img {
@@ -91,8 +88,6 @@ button:hover {
     }
 
     #language-selector {
-        top: 5px;
-        left: 5px;
         gap: 5px; /* Уменьшаем промежутки между флагами */
     }
 }
