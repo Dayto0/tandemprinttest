@@ -100,42 +100,39 @@ function calculatePrice() {
 // Функция для отправки данных на Telegram
 function sendOrder() {
     // Проверяем и получаем данные из полей
-    const width = document.getElementById('width').value;
-    const height = document.getElementById('height').value;
+    const width = parseFloat(document.getElementById('width').value);
+    const height = parseFloat(document.getElementById('height').value);
+    const materialCost = parseFloat(document.getElementById('material').value);
+    const densityCost = parseFloat(document.getElementById('density').value);
     const material = document.getElementById('material').selectedOptions[0].text;
     const density = document.getElementById('density').selectedOptions[0].text;
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
 
-    // Проверяем, заполнены ли имя и телефон
+    // Проверка на заполнение имени и телефона
     if (!name || !phone) {
         alert("Пожалуйста, заполните все поля!");
         return;
     }
 
-    // Если цена не рассчитана, рассчитываем автоматически
-    const widthValue = parseFloat(document.getElementById('width').value);
-    const heightValue = parseFloat(document.getElementById('height').value);
-    const materialCost = parseFloat(document.getElementById('material').value);
-    const densityCost = parseFloat(document.getElementById('density').value);
-
-    let resultPrice = document.getElementById('result').innerText;
-    if (!resultPrice || resultPrice.trim() === "" || isNaN(widthValue) || isNaN(heightValue)) {
-        // Если пользователь не рассчитал цену вручную, рассчитываем здесь
-        if (isNaN(widthValue) || isNaN(heightValue)) {
-            alert("Пожалуйста, введите правильные размеры!");
-            return;
-        }
-
-        const area = widthValue * heightValue;
-        let basePrice = area * materialCost;
-        basePrice += densityCost;
-
-        let minPrice = Math.round(basePrice);
-        let maxPrice = Math.round(basePrice + (basePrice * 0.1));
-
-        resultPrice = `От ${minPrice} до ${maxPrice} драм.`;
+    // Проверка на корректные размеры
+    if (isNaN(width) || isNaN(height)) {
+        alert("Пожалуйста, введите правильные размеры!");
+        return;
     }
+
+    // Расчет цены
+    const area = width * height;
+    let basePrice = area * materialCost;
+    basePrice += densityCost;
+
+    let minPrice = Math.round(basePrice);
+    let maxPrice = Math.round(basePrice + (basePrice * 0.1));
+
+    const resultPrice = `От ${minPrice} до ${maxPrice} драм.`;
+
+    // Записываем цену в элемент #result (на случай, если она потребуется на экране)
+    document.getElementById('result').innerText = resultPrice;
 
     // Получаем текущую дату и время (GMT+4)
     const now = new Date();
@@ -166,7 +163,7 @@ function sendOrder() {
         .then(data => {
             if (data.ok) {
                 alert("Заказ успешно отправлен!");
-                location.reload();  // Обновляем страницу после отправки
+                location.reload(); // Обновляем страницу после отправки
             } else {
                 alert("Ошибка при отправке заказа.");
             }
