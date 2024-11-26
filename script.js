@@ -1,6 +1,6 @@
-// Переводы для разных языков
 const translations = {
     ru: {
+        headerTitle: "Тандем Принт",
         sendingTitle: "Калькулятор цен",
         widthLabel: "Ширина (м):",
         heightLabel: "Высота (м):",
@@ -9,12 +9,11 @@ const translations = {
         calculateBtn: "Рассчитать",
         sendBtn: "Зарегистрировать заказ",
         result: "Цена: ",
-        namePlaceholder: "Введите имя",
-        phonePlaceholder: "Введите номер телефона",
-        widthPlaceholder: "Введите ширину",
-        heightPlaceholder: "Введите высоту"
+        placeholderName: "Введите имя",
+        placeholderPhone: "Введите номер телефона",
     },
     am: {
+        headerTitle: "Տանդեմ Պրինտ",
         sendingTitle: "Գինը հաշվարկելու առարք",
         widthLabel: "Լայնություն (մ):",
         heightLabel: "Բարձրություն (մ):",
@@ -23,12 +22,11 @@ const translations = {
         calculateBtn: "Հաշվել",
         sendBtn: "Գրանցեք ձեր պատվերը",
         result: "Գինը: ",
-        namePlaceholder: "Մուտքագրեք անունը",
-        phonePlaceholder: "Մուտքագրեք հեռախոսահամարը",
-        widthPlaceholder: "Մուտքագրեք լայնությունը",
-        heightPlaceholder: "Մուտքագրեք բարձրությունը"
+        placeholderName: "Մուտքագրեք անունը",
+        placeholderPhone: "Մուտքագրեք հեռախոսահամարը",
     },
     en: {
+        headerTitle: "Tandem Print",
         sendingTitle: "Price Calculator",
         widthLabel: "Width (m):",
         heightLabel: "Height (m):",
@@ -37,15 +35,14 @@ const translations = {
         calculateBtn: "Calculate",
         sendBtn: "Register Order",
         result: "Price: ",
-        namePlaceholder: "Enter name",
-        phonePlaceholder: "Enter phone number",
-        widthPlaceholder: "Enter width",
-        heightPlaceholder: "Enter height"
-    }
+        placeholderName: "Enter name",
+        placeholderPhone: "Enter phone number",
+    },
 };
 
 // Функция для изменения языка
 function changeLanguage(language) {
+    document.getElementById("headerTitle").innerText = translations[language].headerTitle;
     document.getElementById("sendingTitle").innerText = translations[language].sendingTitle;
     document.getElementById("widthLabel").innerText = translations[language].widthLabel;
     document.getElementById("heightLabel").innerText = translations[language].heightLabel;
@@ -54,13 +51,9 @@ function changeLanguage(language) {
     document.getElementById("calculateBtn").innerText = translations[language].calculateBtn;
     document.getElementById("sendBtn").innerText = translations[language].sendBtn;
     document.getElementById("result").innerText = translations[language].result;
+    document.getElementById("name").placeholder = translations[language].placeholderName;
+    document.getElementById("phone").placeholder = translations[language].placeholderPhone;
     document.title = translations[language].sendingTitle;
-
-    // Переводим placeholder для всех полей
-    document.getElementById("name").placeholder = translations[language].namePlaceholder;
-    document.getElementById("phone").placeholder = translations[language].phonePlaceholder;
-    document.getElementById("width").placeholder = translations[language].widthPlaceholder;
-    document.getElementById("height").placeholder = translations[language].heightPlaceholder;
 }
 
 // Устанавливаем язык по умолчанию
